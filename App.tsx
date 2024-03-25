@@ -8,6 +8,8 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Button,
+  NativeModules,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -28,6 +30,9 @@ import {
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
+
+const { CalendarManager } = NativeModules;
+
 
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -62,12 +67,30 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  function addEvent() {
+    // CalendarManager.addEvent('Birthday Party', 'My house', new Date().getTime());
+    CalendarManager.createCalendarEvent(
+      'Birthday Party', 
+      'My house', 
+      new Date().getTime(),
+      (msg: string) => {
+        if (msg) {
+          console.error(`msg found! ${msg}`);
+        }
+      }
+      
+      );
+    console.log('We will invoke the native module here!', CalendarManager);
+  }
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
+
+      <Button title={'Add Event'} onPress={addEvent} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
