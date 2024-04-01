@@ -73,9 +73,14 @@ function App(): React.JSX.Element {
       'Birthday Party', 
       'My house', 
       new Date().getTime(),
-      (msg: string) => {
-        if (msg) {
-          console.error(`msg found! ${msg}`);
+      (error: string, result: string) => {
+
+        if (error) {
+          console.log(`Error! ${error}`);
+        }
+        if (result) {
+          console.log(`msg found! ${result}`);
+          // console.error(`msg found! ${msg}`);
         }
       }
       

@@ -1,6 +1,7 @@
 package com.calendarapp
 
 import android.app.Application
+import com.calendarapp.modules.CalendarManagerPackage
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -10,7 +11,9 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.flipper.ReactNativeFlipper
+//import com.facebook.react.shell.MainReactPackage
 import com.facebook.soloader.SoLoader
+import com.calendarapp.Calendar
 
 class MainApplication : Application(), ReactApplication {
 
@@ -20,6 +23,8 @@ class MainApplication : Application(), ReactApplication {
             PackageList(this).packages.apply {
               // Packages that cannot be autolinked yet can be added manually here, for example:
               // add(MyReactNativePackage())
+//                add( MainReactPackage() )
+                add( Calendar() )
             }
 
         override fun getJSMainModuleName(): String = "index"
@@ -42,4 +47,5 @@ class MainApplication : Application(), ReactApplication {
     }
     ReactNativeFlipper.initializeFlipper(this, reactNativeHost.reactInstanceManager)
   }
+
 }

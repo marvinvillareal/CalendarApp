@@ -8,6 +8,7 @@
 import Foundation
 import EventKit
 
+
 @objc(CalendarManager)
 class CalendarManager: NSObject {
 
@@ -16,10 +17,10 @@ class CalendarManager: NSObject {
     return true
   }
   
-  @objc(createCalendarEvent:location:date:myCallback:)
-  func createCalendarEvent(_ name: String, location: String, date: NSNumber, myCallback:(String)->(String)) -> Void {
-
-    myCallback("this is result")
+  @objc(createCalendarEvent02:location:date:myCallback:)
+  func createCalendarEvent02(_ name: String, location: String, date: NSNumber, myCallback:([String])->Void) {
+//    RCTLogInfo(@"Pretending to create an event %@ at %@", name, location);
+    myCallback(["Error","this is result"])
   }
 
   @objc(addEvent:location:date:)
